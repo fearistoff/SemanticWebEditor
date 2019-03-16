@@ -1,0 +1,6 @@
+createNewButton.addEventListener("click", function () {
+workspace.innerHTML += '<div id="s' + i + '" class="semantic-item"></div>';
+document.querySelector("#s" + i).style.top = i*10 + "px";
+document.querySelector("#s" + i).style.left = i*10 + "px";
+i++;
+});
