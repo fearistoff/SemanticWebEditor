@@ -2,44 +2,42 @@
 <html lang="ru">
 <head>
 	<meta charset="UTF-8">
-	<link rel="stylesheet" href="style.css">
+	<link rel="stylesheet" href="css/style.css">
+	<link rel="shortcut icon" href="img/favicon.ico">
+	<link href="css/all.css" rel="stylesheet">
 	<title>Редактор семантической сети</title>
 </head>
 <body class="black">
-	<h1>Редактор семантической сети</h1>
-	<span id="bnw" class="black">Тёмная тема</span>
-	<div>
-		<div id="tools" class="black" >
-			<div id="new-sem-item" class="button black">Добавить</div>
-		</div>
-		<div id="workspace" class="black"></div>
+	<div class="dark-background"></div>
+	<div class="item-panel">
 	</div>
-
-	<script src="script.js"></script>
-
-	<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r72/three.min.js"></script>
-	<script>
-	  var renderer = new THREE.WebGLRenderer();
-	  renderer.setSize(window.innerWidth, window.innerHeight);
-	  document.body.appendChild(renderer.domElement);
-
-	  var camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 500);
-	  camera.position.set(0, 0, 100);
-	  camera.lookAt(new THREE.Vector3(0, 0, 0));
-
-	  var scene = new THREE.Scene();
-	  
-	  var material = new THREE.LineBasicMaterial({ color: 0x0000ff });
-	  
-	  var geometry = new THREE.Geometry();
-	  geometry.vertices.push(new THREE.Vector3(-10, 0, 0));
-	  geometry.vertices.push(new THREE.Vector3(0, 10, 0));
-	  geometry.vertices.push(new THREE.Vector3(10, 0, 0));
-	  
-	  var line = new THREE.Line(geometry, material);
-	  
-	  scene.add(line);
-	  renderer.render(scene, camera);
-	</script> -->
+	<h1>Редактор семантической сети</h1>
+	<span id="bnw">Светлая тема</span>
+	<div id="main-container">
+		<div id="tools">
+			<div id="new-sem-item" class="button">
+				<i class="fas fa-plus"></i>
+				<span>Добавить</span>
+			</div>
+			<div id="delete-sem-item" class="button">
+				<i class="fas fa-trash-alt"></i>
+				<span>Удалить</span>
+			</div>
+			<div id="connect-sem-item" class="button">
+				<i class="fas fa-cogs"></i>
+				<span>Связать</span>
+			</div>
+			<div id="edit-sem-item" class="button">
+				<i class="fas fa-pen"></i>
+				<span>Изменить</span>
+			</div>
+		</div>
+		<div id="ws">
+			<div id="workspace"></div>
+			<canvas width="1920" height="1080"></canvas>
+		</div>
+	</div>
+	<script src="js/script.js"></script>
+	<script src="js/lib.js"></script>
 </body>
 </html>
