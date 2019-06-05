@@ -5,25 +5,30 @@
 	<link rel="stylesheet" href="css/style.css">
 	<link rel="shortcut icon" href="img/favicon.ico">
 	<link href="css/all.css" rel="stylesheet">
-	<title>Редактор семантической сети</title>
+	<title>Модуль создания услуг</title>
+	<script src="js/lib.js"></script>
+	<script src="js/x2js.js"></script>
+	<script src="js/underscore-min.js"></script>
+	<script src="js/xml-to-json.js"></script>
+	<script src="js/json-to-xml.js"></script>
+	<script src="js/jsonsup.js"></script>
+	<script src="js/pretty.js"></script>
 </head>
 <body class="black">
+	<input id="file-input" type="file" id="input" accept=".owl,.owx" style="display: none;">
 	<div class="dark-background"></div>
-	<div class="dark-background"></div>
+	<div class="close-label">Закрыть окно</div>
+	<div class="second-dark-background"></div>
 	<div class="item-panel"></div>
-	<div class="notification-connection-window">
-		<h4><i class="fas fa-exclamation-triangle"></i> Уведосмление</h4>
-	</div>
-	<h1>Редактор семантической сети</h1>
+	<div id="notification-window"></div>
+	<h1>Модуль создания услуг</h1>
 	<span id="bnw">Светлая тема</span>
 	<div id="main-container">
 		<div id="tools">
 			<div id="open-sem-item" class="button">
-				<label>
-					<input id="file-input" type="file" id="input" style="display: none;">
-					<i class="fas fa-file"></i>
-					<span>Открыть</span>
-				</label>
+				
+				<i class="fas fa-folder-open"></i>
+				<span>Открыть</span>
 			</div>
 			<div id="save-sem-item" class="button">
 				<i class="fas fa-save"></i>
@@ -46,6 +51,11 @@
 				<i class="fas fa-pen"></i>
 				<span>Изменить</span>
 			</div>
+			<div id="toggle-scale" class="button">
+				<i class="fas fa-search-minus"></i>
+				<i class="fas fa-search-plus"></i>
+				<span>Отдалить</span>
+			</div>
 		</div>
 		<div id="ws">
 			<div id="workspace"></div>
@@ -61,12 +71,5 @@
 		</div>
 	</div>
 	<script src="js/script.js"></script>
-	<script src="js/lib.js"></script>
-	<script src="js/x2js.js"></script>
-	<script src="js/underscore-min.js"></script>
-	<script src="js/xml-to-json.js"></script>
-	<script src="js/json-to-xml.js"></script>
-	<script src="js/jsonsup.js"></script>
-	<script src="js/pretty.js"></script>
 </body>
 </html>

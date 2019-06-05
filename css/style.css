@@ -13,7 +13,7 @@ h2 {
 	overflow: hidden;
 	margin: 0;
 	font-size: 16px;
-	padding: 10px;
+	padding: 7px 10px;
 	text-align: center;
 	border-bottom-width: 1px;
 	border-bottom-style: solid;
@@ -22,6 +22,20 @@ h2 {
 /*Отключение выделения текста*/ 
 *::selection {
   background: transparent;
+}
+
+.white .selectable::selection {
+	background: rgb(85, 255, 85);
+	color: #000000;
+}
+
+.black .selectable::selection {
+	background: #3e0081;
+	color: #ffffff;
+}
+
+*:focus {
+  outline: none;
 }
 
 h3 {
@@ -56,6 +70,7 @@ body {
 }
 
 #main-container {
+	user-select: none;
 	padding: 0 3px;
 	display: flex;
 	justify-content: space-between;
@@ -63,6 +78,7 @@ body {
 }
 
 h1 {
+	user-select: none;
   background-image: url(../img/logo.png);
   background-size: auto 100%;
   background-size: 50px;
@@ -74,6 +90,7 @@ h1 {
 }
 
 #bnw {
+	user-select: none;
 	border-radius: 3px;
 	padding: 5px;
 	position: absolute;
@@ -97,6 +114,7 @@ h1 {
 	position: absolute;
   width: 100%;
   height: 100%;
+  z-index: 5;
 }
 
 #ws {
@@ -128,7 +146,6 @@ canvas {
 .semantic-item {
 	z-index: 5;
 	border-radius: 3px;
-	cursor: pointer;
 	top: 10px;
 	left: 10px;
 	width: 150px;
@@ -141,7 +158,7 @@ canvas {
 	overflow: hidden;
   list-style: none;
   font-size: 11px;
-  padding: 5px;
+  padding: 5px 5px 0 5px;
   margin: 0;
 }
 
@@ -337,10 +354,19 @@ h4 {
 	display: none;
 	width: 400px;
 	border-radius: 5px;
-	height: 600px;
+	max-height: 600px;
 	position: fixed;
 	z-index: 10;
-	transition: transform 0.5s, opacity 0.5s;
+	transition: transform 0.5s, opacity 0.5s, top 0.5s;
+}
+
+.item-panel.show {
+	opacity: 1;
+	transform: scale(1);
+}
+
+.item-panel.fading {
+	opacity: 0.5;
 }
 
 .item-panel .button {
@@ -431,8 +457,41 @@ h4 {
 	z-index: 9;
 }
 
-.dark-background:nth-child(even) {
+.dark-background.show {
+	opacity: 0.5;
+}
+
+.close-label {
 	z-index: 11;
+	opacity: 0;
+	position: fixed;
+  	transform: translate(0, 30px);	
+  	left: 115px;
+	transition: opacity 0.3s linear, transform 0.3s ease;
+}
+
+.black .close-label {
+  	color: rgb(225,225,225);
+}
+
+.white	 .close-label {
+  	color: rgb(32,32,32);
+}
+
+.dark-background:hover ~ .close-label {
+	opacity: 1;
+  	transform: translate(0, 0);
+}
+
+.second-dark-background {
+	z-index: 11;
+	opacity: 0;
+	transition: opacity 0.5s;
+	display: none;
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	background-color: rgb(0,0,0);
 }
 
 .item-panel li {
@@ -446,10 +505,10 @@ h4 {
 }
 
 .item-panel ul {
-  overflow-y: overlay;
-  max-height: 439px;
+	overflow-y: overlay;
+	max-height: 300px;
 	margin: 16px 0 0 0;
-  padding: 0 20px;
+	padding: 0 20px;
 }
 
 .data-index {
@@ -504,7 +563,8 @@ h4 {
 }
 
 .button-place {
-  margin-top: 16px;
+  margin-top: 5px;
+  margin-bottom: 32px;
   padding: 0 20px;
   height: 32px;
   display: flex;
@@ -590,7 +650,7 @@ h4 {
 #items-list {
 	padding: 0;
 	margin: 0;
-  overflow: overlay;
+	overflow: auto;
 }
 
 #items-list .identifier {
@@ -642,3 +702,113 @@ h4 {
     background-color: #55ff55;
     color: #020;
 }
+
+#notification-window {
+    max-width: 500px;
+    min-width: 300px;
+	display: none;
+	position: fixed;
+	z-index: 12;
+	opacity: 0;
+	border-width: 1px;
+	border-style: solid;
+	transform: scale(0.8);
+	border-radius: 5px;
+	transition: transform 0.5s, opacity 0.5s;
+}
+
+.black #notification-window {
+	background-color: rgb(50,50,50);
+	border-color: rgb(55,0,115);
+}
+
+.white #notification-window {
+	background-color: rgb(225,225,225);
+	border-color: rgb(85,255,85);
+}
+
+#notification-window h5 {
+	text-align: center;
+	padding: 0 30px;
+    font-weight: normal;
+}
+
+.notification-button-area {
+	display: flex;
+	justify-content: space-around;
+}
+
+.notification-button {
+	font-family: inherit;
+	display: block;
+    margin: 0 auto 10px;
+	border-radius: 30px;
+	border: none;
+	height: 32px;
+	padding: 0 15px;
+	cursor: pointer;
+}
+
+.white .notification-button {
+	background-color: #8f8;
+	color: #090;
+}
+
+.black .notification-button {
+	background-color: #3e0081;
+	color: #b775ff;
+}
+
+.white .notification-button:hover {
+	background-color: #55ff55;
+	color: #020;
+}
+
+.black .notification-button:hover {
+	background-color: #370073;
+	color: #cea2ff;
+}
+
+.hidden ul {
+	display: none;
+}
+
+.toggle-list-view .fa-angle-down {
+	display: none;
+}
+
+.hidden .fa-angle-up {
+	display: none;
+}
+
+.hidden .fa-angle-down {
+	display: block;
+}
+
+.toggle-list-view {
+	cursor: pointer;
+	font-size: 12px;
+	line-height: 12px;
+	text-align: center;
+}
+
+.scale-out .fa-search-plus {
+	display: inline !important;
+}
+
+.scale-out .fa-search-minus {
+	display: none !important;
+}
+
+.fa-search-plus {
+	display: none !important;
+}
+
+.fa-search-minus {
+	display: inline !important;
+}
+
+.scale-out .semantic-item {
+	transform: scale(0.7);
+	transform-origin: 0 0;
+} 

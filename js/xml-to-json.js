@@ -24,10 +24,12 @@ function loadXMLtoJSON(s) {
             return value;
         }, 3);
         if (t != "null" && t != "undefined") return t;
-        alert(msg);
+        throw msg;
+        // alert(msg);
         return;
         if (!t || t == "null") { 
-            alert(msg);
+            // alert(msg);
+            throw msg;
         }
     }
 }
