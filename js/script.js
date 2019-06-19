@@ -561,13 +561,13 @@ function prepareWindow(changeIdentificator, prepSemanticItem) {		//функци�
 				document.querySelectorAll(".data-value").forEach(function(item) {
 					listValue.push(item.value);
 				});
-				itemValidation(document.querySelector(".data-header").value, listIndex, listValue, () => {
+				if (itemValidation(document.querySelector(".data-header").value, listIndex, listValue)) {
 					//проверка на кириллицу
 					for (let i = 0; i < listIndex.length; i++) {
 						prepSemanticItem.setData(listIndex[i] ,listValue[i])
 					}
 					hideEditWindow();
-				});
+				}
 			});
 			break;
 		case "create":
