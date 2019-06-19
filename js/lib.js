@@ -81,16 +81,17 @@ function addSharp(stringSh) {
 }
 
 function sameElements(array) {
+	let ans = false;
 	array.forEach((item, i) => {
 		array.forEach((jtem, j) => {
 			if (i != j) {
 				if (item === jtem) {
-					return true;
+					ans = true;
 				}
 			}
 		});
 	});
-	return false;
+	return ans;
 };
 
 function cyrillicCheck(argument) {

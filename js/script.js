@@ -175,6 +175,7 @@ function deleteSemanticItem(semanticItemToDelete) {		//функция удале
 					});
 				}
 				listOfSemanticItems.splice(index, 1);
+				itemsCreateCounter -= 1;
 				updateEverything();
 				return;
 			}
@@ -475,7 +476,7 @@ function prepareWindow(changeIdentificator, prepSemanticItem) {		//функци�
 					if (key === "Тип") {
 						itemPanel.querySelector("ul").innerHTML += `<li>
 																	<input class="data-index selectable" disabled type="text" value='${key}'>
-																	<input type="text" class="data-value placeholder="Название типа" selectable" value='${prepSemanticItem.data[key]}'>
+																	<input type="text" class="data-value selectable" placeholder="Название типа" value='${prepSemanticItem.data[key]}'>
 																</li>`;
 					} else {
 						itemPanel.querySelector("ul").innerHTML += `<li>
@@ -505,7 +506,7 @@ function prepareWindow(changeIdentificator, prepSemanticItem) {		//функци�
 				});
 				itemPanel.querySelector("ul").innerHTML += `<li>
 																<input class="data-index selectable" type="text" value="Index">
-																<input type="text" class="data-value selectable" value="Value">
+																<input type="text" class="data-value selectable"  value="Value">
 																<div  class="button sem-data-delete">
 																	<i class="fas fa-minus"></i><span>Удалить свойство</span>
 																</div>
@@ -547,7 +548,7 @@ function prepareWindow(changeIdentificator, prepSemanticItem) {		//функци�
 			});
 			document.querySelector("#sem-done").addEventListener("click", function() {
 				for (let key in prepSemanticItem.data) {
-					if (key != "header" && key != "top" && key != "left"){
+					if (key == "header" || key == "top" || key == "left"){
 						delete prepSemanticItem.data[key];
 					}
 				}
@@ -560,13 +561,13 @@ function prepareWindow(changeIdentificator, prepSemanticItem) {		//функци�
 				document.querySelectorAll(".data-value").forEach(function(item) {
 					listValue.push(item.value);
 				});
-				if (itemValidation(document.querySelector(".data-header").value, listIndex, listValue)) {
+				itemValidation(document.querySelector(".data-header").value, listIndex, listValue, () => {
 					//проверка на кириллицу
 					for (let i = 0; i < listIndex.length; i++) {
 						prepSemanticItem.setData(listIndex[i] ,listValue[i])
 					}
 					hideEditWindow();
-				}
+				});
 			});
 			break;
 		case "create":
@@ -892,6 +893,7 @@ document.getElementById('file-input').addEventListener("change", function(e) {
     for(let i = listOfSemanticItems.length - 1; i >= 0; i--) {
     	deleteSemanticItem(listOfSemanticItems[i]);
     }
+    itemsCreateCounter = 0;
     listOfSemanticConnections.forEach(function(item) {
     	deleteSemanticItem(item);
     });
@@ -1208,7 +1210,7 @@ function itemValidation(header, listIndex, listValue) {
 		notificationText += "<br>";
 		hasError = true;
 	}
-	if (sameElements(listValue)) {
+	if (sameElements(listIndex)) {
 		notificationText += "Не допускается одинаковые имена параметров объекта";
 		notificationText += "<br>";
 		hasError = true;
